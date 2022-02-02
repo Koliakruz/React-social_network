@@ -12,6 +12,9 @@ const NavBar = (props) => {
         <NavLink to='/dialogues' className={SelectedLink()}>Message</NavLink>
       </div>
       <div className={classes.item}>
+        <NavLink to='/users' className={SelectedLink()}>Users</NavLink>
+      </div>
+      <div className={classes.item}>
         <NavLink to='/news' className={SelectedLink()}>News</NavLink>
       </div>
       <div className={classes.item}>
