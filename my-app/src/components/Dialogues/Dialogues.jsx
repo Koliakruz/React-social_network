@@ -1,5 +1,5 @@
 import React from 'react';
-import { addMessageCreator, updateMessageCreator } from '../../redux/messages-reducer';
+import { Navigate } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem'
 import classes from './Dialogues.module.css'
 import Message from './Message/Message'
@@ -20,6 +20,8 @@ const Dialogues = (props) => {
     let newMessage = e.target.value;
     props.updateMessageBody(newMessage)
   }
+
+  if(!props.isAuth) return <Navigate to="/login"/>  
 
   return (
     <div className={classes.dialogues}>
