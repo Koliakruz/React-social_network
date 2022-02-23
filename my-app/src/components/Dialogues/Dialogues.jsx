@@ -2,26 +2,23 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem'
 import classes from './Dialogues.module.css'
+import AddMessageForm from './DialoguesForm';
+//import AddMessageReduxForm from './DialoguesForm';
 import Message from './Message/Message'
 
 const Dialogues = (props) => {
 
-  let state = props.messagePage; 
-  
-  let dialoguesElements = state.dialogues.map(d => <DialogItem name={d.name} key = {d.id} id={d.id} />);
-  let messagesElement = state.messages.map(m => <Message message={m.message} key = {m.id} />);
+  let state = props.messagePage;
+
+  let dialoguesElements = state.dialogues.map(d => <DialogItem name={d.name} key={d.id} id={d.id} />);
+  let messagesElement = state.messages.map(m => <Message message={m.message} key={m.id} />);
   let newMessageText = state.newMessageText;
 
-  let onMessageClick = () => {
-    props.addMessage();
+  let addNewMessage = (values) => {
+    props.addMessage(values.newMessageText);
   }
 
-  let onNewMessageChange = (e) => {
-    let newMessage = e.target.value;
-    props.updateMessageBody(newMessage)
-  }
-
-  if(!props.isAuth) return <Navigate to="/login"/>  
+  if (!props.isAuth) return <Navigate to="/login" />
 
   return (
     <div className={classes.dialogues}>
@@ -31,12 +28,7 @@ const Dialogues = (props) => {
       <div className={classes.messages}>
         <div>{messagesElement}</div>
         <div>
-          <div>
-            <textarea onChange={ onNewMessageChange } value={newMessageText} placeholder= 'Enter your message'/>
-          </div>
-          <div>
-            <button onClick={ onMessageClick }> send </button>
-          </div>
+          <AddMessageForm onSubmit={addNewMessage} />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { addMessageCreator, updateMessageCreator } from '../../redux/messages-reducer';
+import { addMessageCreator } from '../../redux/messages-reducer';
 import Dialogues from './Dialogues';
 import { connect } from 'react-redux';
 import { withAuthNavigate } from '../../hoc/withAuthNavigate';
@@ -8,18 +8,13 @@ let mapStateToProps = (state) => {
   return{
     messagePage: state.messagePage,
   }
-
 }
 
 let mapDispatchToProps = (dispatch) => {
   return{
-    updateMessageBody: (newMessage) => {
-      dispatch(updateMessageCreator(newMessage));
-    },
-    addMessage: () => {
-      dispatch(addMessageCreator());
+    addMessage: (newMessageText) => {
+      dispatch(addMessageCreator(newMessageText));
     }
-
   }
 }
 
